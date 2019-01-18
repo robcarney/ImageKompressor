@@ -18,8 +18,9 @@ def main():
     num_centroids = args.num_centroids
     iters = args.iters
 
-    img = image.Image('../images/bird_uncompressed.png')
+    img = image.Image(image_path='../images/bird_uncompressed.png')
     compressed_img = kmcomp.compress_image(img, num_centroids, iters)
+    print(compressed_img.shape())
 
 
 if __name__ == '__main__':

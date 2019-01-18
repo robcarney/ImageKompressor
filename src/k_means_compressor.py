@@ -12,7 +12,7 @@ def compress_image(img, num_centroids, iters):
         img_data: image.Image to be compressed
     
     Returns:
-        Numpy array with image data which has been compressed
+        image.Image with image data which has been compressed
     """
     # Get OpenCL context and queue
     context, queue = setup_opencl()
@@ -73,7 +73,7 @@ def compress_image(img, num_centroids, iters):
             compressed_img[y][x][0] = int(centroids[3*centroids_idx] * 256)
             compressed_img[y][x][1] = int(centroids[3*centroids_idx+1] * 256)
             compressed_img[y][x][2] = int(centroids[3*centroids_idx+2] * 256)
-    return compressed_img
+    return image.Image(image_data=compressed_img)
 
 
 
