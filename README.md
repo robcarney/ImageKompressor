@@ -8,3 +8,31 @@ ImageKompressor uses the K-Means clustering algorithm to compress an image by id
 After iterating this a certain number of times, we achieve centroids which accurately capture clusters in the data. For image compression, this means that we get a certain colors (each centroid represents a color) which capture much of the color data for the picture. Each pixel, rather than getting an RGB value, simply contains a centroid index representing which color to use.
 ## Technical details
 The image compression is done using a combination of Python (using NumPy) and OpenCL to use to GPU to achieve greater concurrency where appropriate. The assignment stage is done via an OpenCL kernel which finds the closest centroid for each pixel concurrently. Then, the update happens via basic NumPy operations, and so on. 
+## How to run
+__Environment Setup__
+As this project makes use of OpenCL, it is required that you have an OpenCL SDK installed on your machine.
+
+For the Python requirements, it is recommended to use [CondaForge](https://conda-forge.org/) to run. You can follow the instructions [here](https://documen.tician.de/pyopencl/misc.html), and this should set you up with all necessary dependencies.
+__Running the program__
+After cloning the repo, navigate to the `src/` directory. From here, you can run the program as follows:
+```
+$ python main.py -h
+usage: main.py [-h] [--img IMG_FILE] [--out OUT_FILE]
+               [--num-centroids NUM_CENTROIDS] [--iters ITERS]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --img IMG_FILE        File location for image to be compressed (default is
+                        ../images/bird_uncompressed.png)
+  --out OUT_FILE        File location for compressed image to be stored
+                        (default is ../images/compressed_img.png)
+  --num-centroids NUM_CENTROIDS
+                        The number of centroids to use in the K-Means
+                        clustering algorithm (default is 20)
+  --iters ITERS         The number of iterations to run the K-Means clustering
+                        algorithm (default is 50
+```
+Running simply `python main.py` will compress the example image, and store the compressed version at `images/compressed_img.png`.
+
+
+
