@@ -39,6 +39,14 @@ class Image:
         """
         return self.data.shape
 
+    def save(self, out_file):
+        """save saves the Image to a given out file
+
+        Args:
+            out_file: Output file location
+        """
+        cv2.imwrite(out_file, self.data)
+
     def raw_data(self, data_format=ImageDataFormat.DEFAULT):
         """raw_data returns the data for the Image, formatted as specified.
 
