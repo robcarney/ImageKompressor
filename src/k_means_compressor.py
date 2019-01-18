@@ -12,7 +12,7 @@ def compress_image(img, num_centroids, iters):
         img_data: image.Image to be compressed
     
     Returns:
-        New image.Image which has been compressed
+        Numpy array with image data which has been compressed
     """
     # Get OpenCL context and queue
     context, queue = setup_opencl()
@@ -35,7 +35,7 @@ def compress_image(img, num_centroids, iters):
     
     # Load and compile the kernel
     build_ops = ["-D NUM_CENTROIDS={0}".format(num_centroids), "-D IMG_WIDTH={0}".format(img_dims[1])]
-    program = cl.Program(context, open('kernels/image_old.cl').read()).build(options=build_ops)
+    program = cl.Program(context, open('kernels/image_kmeans.cl').read()).build(options=build_ops)
     
     # Get the kernel and set the arguments
     kernel = cl.Kernel(program, 'FindClosestCentroid')
