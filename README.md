@@ -21,6 +21,15 @@ __Compressed images__
 | __100 iterations__ | ![Compressed 20/100](/images/compressed_img_20_100.png) | ![Compressed 50/100](/images/compressed_img_50_100.png) | ![Compressed 100/100](/images/compressed_img_100_100.png) |
 ## Technical details
 The image compression is done using a combination of Python (using NumPy) and OpenCL to use to GPU to achieve greater concurrency where appropriate. The assignment stage is done via an OpenCL kernel which finds the closest centroid for each pixel concurrently. Then, the update happens via basic NumPy operations, and so on. 
+## Performance
+Linux
+
+|               | 20 centroids  | 50 centroids  | 100 centroids |
+| ------------- |:-------------:| -----:| ----:|
+| __25 iterations__  | 2.232s | 2.164s | 2.107s |
+| __50 iterations__  | 3.121s | 3.249s | 3.347s |
+| __100 iterations__ | 5.419s | 5.356s | 5.791s |
+
 ## How to run
 __Environment Setup__
 As this project makes use of OpenCL, it is required that you have an OpenCL SDK installed on your machine.
